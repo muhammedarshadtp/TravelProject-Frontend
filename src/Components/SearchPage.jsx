@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { FaMoneyBillWave, FaWallet, FaCreditCard, FaUser, FaUsers, FaUserFriends, FaHeart } from "react-icons/fa";
+
 
 const SearchPage = () => {
     const [selectedBudget, setSelectedBudget] = useState(null);
@@ -6,16 +8,29 @@ const SearchPage = () => {
     const [selectedActivities, setSelectedActivities] = useState([]);
     const [travelDate, setTravelDate] = useState("");
     const [numPeople, setNumPeople] = useState(1);
-    const [numDays,setNumDays] = useState(1)
+    const [numDays, setNumDays] = useState(1)
+
+    const groupOptions = [
+        { name: "Single", icon: <FaUser size={24} />, description: "Solo traveler" },
+        { name: "Family", icon: <FaUsers size={24} />, description: "Family-friendly" },
+        { name: "Friends", icon: <FaUserFriends size={24} />, description: "Group of friends" },
+        { name: "Couple", icon: <FaHeart size={24} />, description: "Romantic getaway" }
+    ];
+
+    const budgetOptions = [
+        { name: "Low", icon: <FaMoneyBillWave size={24} />, description: "Budget-friendly options" },
+        { name: "Medium", icon: <FaWallet size={24} />, description: "Balanced comfort & cost" },
+        { name: "High", icon: <FaCreditCard size={24} />, description: "Luxury & premium experience" }
+    ];
 
 
     const handleNumChange = (e) => {
         const value = parseInt(e.target.value, 10);
-        setNumDays(value >= 1 ? value : 0); 
+        setNumDays(value >= 1 ? value : 0);
     };
     const handleChange = (e) => {
         const value = parseInt(e.target.value, 10);
-        setNumPeople(value >= 1 ? value : 0); 
+        setNumPeople(value >= 1 ? value : 0);
     };
 
     const today = new Date().toISOString().split("T")[0];
@@ -37,17 +52,13 @@ const SearchPage = () => {
             }}
         >
             {/* Form Container */}
-            <div className="w-full max-w-md p-8 rounded-lg shadow-2xl bg-gray-200 bg-opacity-20 backdrop-blur-lg mt-10 mb-10">
-
-
+            <div className="w-full max-w-md p-10 rounded-lg shadow-2xl bg-gray-200 bg-opacity-20 backdrop-blur-lg mt-10 mb-10">
                 {/* Form */}
                 <form className="space-y-6">
                     {/* Destination */}
                     <div className="form-control">
-                        <label className="label ont-semibold text-white">Destination</label>
-
+                        <label className="label font-semibold text-white">Destination</label>
                         <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-md" />
-
                     </div>
 
                     {/* Travel Date */}
@@ -66,29 +77,31 @@ const SearchPage = () => {
                     <div className="form-control">
                         <label className="label ont-semibold text-white">Number of Days</label>
                         <input type="text"
-                        value={numDays}
-                        onChange={handleNumChange}
-                        min="0"
-                         placeholder="Type here"
-                          className="input input-bordered w-full max-w-md" />
+                            value={numDays}
+                            onChange={handleNumChange}
+                            min="0"
+                            placeholder="Type here"
+                            className="input input-bordered w-full max-w-md" />
                     </div>
 
                     {/* Budget */}
                     <div className="form-control">
                         <label className="label font-semibold text-white">Budget</label>
-                        <div className="flex flex-wrap gap-2">
-                            {["Low", "Medium", "High"].map((budget) => (
-                                <button
-                                    key={budget}
-                                    type="button"
-                                    className={`btn btn-sm border ${selectedBudget === budget
-                                        ? "bg-black text-white" // Selected style
-                                        : "btn-outline border-black text-white" // Default style
+                        <div className="flex flex-wrap gap-3">
+                            {budgetOptions.map((budget) => (
+                                <div
+                                    key={budget.name}
+                                    className={`p-4 w-28  flex flex-col items-center justify-center rounded-lg cursor-pointer transition-all duration-300
+                                         ${selectedBudget === budget.name
+                                            ? "bg-black text-white shadow-lg scale-105"
+                                            : "bg-gray-200 text-gray-800"
                                         }`}
-                                    onClick={() => setSelectedBudget(budget)}
+                                    onClick={() => setSelectedBudget(budget.name)}
                                 >
-                                    {budget}
-                                </button>
+                                    {budget.icon}
+                                    <p className="font-semibold mt-2">{budget.name}</p>
+                                    <p className="text-xs text-center">{budget.description}</p>
+                                </div>
                             ))}
                         </div>
                     </div>
@@ -108,19 +121,20 @@ const SearchPage = () => {
                     {/* Group Type */}
                     <div className="form-control">
                         <label className="label font-semibold text-white">Group Type</label>
-                        <div className="flex flex-wrap gap-2">
-                            {["Family", "Friends", "Couple"].map((group) => (
-                                <button
-                                    key={group}
-                                    type="button"
-                                    className={`btn btn-sm border ${selectedGroupType === group
-                                        ? "bg-black text-white" // Selected style
-                                        : "btn-outline border-black text-white" // Default style
+                        <div className="flex justify-between gap-4">
+                            {groupOptions.map((group) => (
+                                <div
+                                    key={group.name}
+                                    className={`p-4 min-w-[85px] flex flex-col items-center justify-center rounded-lg cursor-pointer transition-all duration-300 ${selectedGroupType === group.name
+                                            ? "bg-black text-white shadow-lg scale-105"
+                                            : "bg-gray-200 text-gray-800"
                                         }`}
-                                    onClick={() => setSelectedGroupType(group)}
+                                    onClick={() => setSelectedGroupType(group.name)}
                                 >
-                                    {group}
-                                </button>
+                                    {group.icon}
+                                    <p className="font-semibold mt-2">{group.name}</p>
+                                    <p className="text-xs text-center">{group.description}</p>
+                                </div>
                             ))}
                         </div>
                     </div>
