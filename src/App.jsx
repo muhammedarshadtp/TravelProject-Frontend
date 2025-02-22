@@ -1,21 +1,16 @@
+import Home from "./Components/Home";
+import Input from "./Components/Input";
 
-import { Routes, Route } from 'react-router-dom';
-import HomePage from './Components/HomePage';
-import SearchPage from './Components/SearchPage';
-import SearchOutPut from './Components/SearchOutPut';
 
-function App() {
+
+const App = () => {
+  
 
   return (
+    <div className="flex flex-col items-center">
+      <Input/>
+    </div>
+  );
+};
 
-    <Routes>
-      <Route path='/' element={<HomePage/>}/>
-      <Route path='/search' element={<SearchPage/>}/>
-      <Route path='/searchoutput' element={<SearchOutPut/>}/>
-
-    </Routes>
-
-  )
-}
-
-export default App
+export default App;
