@@ -60,7 +60,7 @@ const handleActivityClick = (activity) => {
               <span className="text-blue-500 items-start">Holiday</span>
             </h2>
 
-            <div className="shadow-lg rounded-3xl p-4 space-y-4 w-full bg-gray-100">
+            <div className="shadow-lg rounded-3xl p-4 space-y-4 w-full bg-[#21212]">
             {/* Inputs in a Single Line */}
             <div className="flex flex-wrap gap-3 ml-10">
                 < input  type="text" placeholder= "Destination"  className="w-1/5 p-3 border rounded-md bg-slate-200 text-black focus:outline-none" />
@@ -72,6 +72,7 @@ const handleActivityClick = (activity) => {
             {/* Budget Section */}
             <div className="form-control">
                 <div className="flex flex-wrap gap-6 ml-20">
+                
                     {budgetOptions.map((budget) => (
                         <div
                             key={budget.name}
