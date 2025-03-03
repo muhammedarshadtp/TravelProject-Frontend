@@ -54,7 +54,7 @@ const Input = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`http://buzzbrewsandchills.shop/search`, {
+      const res = await axios.post(`https://buzzbrewsandchills.shop/search`, {
         destination,
         travel_date: travelDate,
         num_days: numDays,
