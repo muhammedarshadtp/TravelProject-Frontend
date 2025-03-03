@@ -27,6 +27,7 @@ const Input = () => {
     const [additionalComments, setAddtionalComments] = useState("");
     const [resData, setResData] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [isDragging, setIsDragging] = useState(false);
 
     // Load stored response from localStorage once on mount
     useEffect(() => {
@@ -98,8 +99,34 @@ const Input = () => {
         }
     };
 
+    // Clear button handler to reset form & localStorage
+    const handleClear = () => {
+        setDestination("");
+        setSelectedBudget("");
+        setSelectedGroupType("");
+        setSelectedActivities([]);
+        setTravelDate("");
+        setNumPeople("");
+        setNumDays("");
+        setAddtionalComments("");
+        setResData(null);
+        localStorage.removeItem("response");
+    };
+
     return (
-        <div className="h-screen w-screen bg-white overflow-hidden">
+        <div className="h-screen w-screen bg-white overflow-hidden relative">
+            <motion.button
+                drag
+                dragMomentum={false}
+                onDragStart={() => setIsDragging(true)}
+                onDragEnd={() => setIsDragging(false)}
+                onClick={() => {
+                    if (!isDragging) handleClear();
+                }}
+                className="fixed top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-full shadow-lg z-50 cursor-move"
+            >
+                Clear
+            </motion.button>
             <div className="flex flex-col md:flex-row h-full gap-x-2">
                 {/* Left Side - Query Form (Smaller & Scrollable) */}
                 <div className="md:w-4/12 p-6 relative overflow-y-auto max-h-screen">
