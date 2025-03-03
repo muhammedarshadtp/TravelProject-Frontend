@@ -82,10 +82,10 @@ const Input = () => {
   };
 
   return (
-    <div className="h-screen w-screen bg-white overflow-y-auto">
-      <div className="flex flex-col md:flex-row h-full">
-        {/* Left Side - Query Form */}
-        <div className="md:w-7/12 p-6 relative">
+    <div className="h-screen w-screen bg-white overflow-hidden">
+      <div className="flex flex-col md:flex-row h-full gap-x-2">
+        {/* Left Side - Query Form (Smaller Width & Scroll Enabled) */}
+        <div className="md:w-5/12 p-6 relative overflow-y-auto max-h-screen">
           <h2 className="text-[40px] md:text-[30px] leading-[1.3] font-bold text-black text-center mb-8">
             Search Your Next <br />
             <span className="text-blue-500">Holiday</span>
@@ -198,13 +198,12 @@ const Input = () => {
             </div>
           </div>
           {/* Home Image on the Left Side */}
-          <div className="mt-8">
+          {/* <div className="mt-8">
             <img src={home2} alt="home2" className="w-full object-cover shadow-md" />
-          </div>
+          </div> */}
         </div>
         {/* Right Side - Itinerary or Placeholder Image (Scrollable) */}
-        <div className="md:w-5/12 bg-gray-100 p-4 overflow-y-auto max-h-screen">
-
+        <div className="md:w-7/12 bg-gray-100 p-4 overflow-y-auto h-screen">
           {resData ? (
             <ItineraryRenderer responseData={resData} />
           ) : (
